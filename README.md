@@ -10,7 +10,7 @@
 4. Whether you are in a local environment or not, install the required libraries by typing `pip install -r requirements.txt`.
 
 # PREPARATION
-This script works by using local images of the enchant and spell it will cast in order to find and click on them. Images for the enchant 'Epic' and the spell 'Humongofrog' are included by default. However, if you intend to farm with a different spell/enchant, you will need to replace these images in order for the script to work. Here are the steps you cna take to do this:
+This script works by using local images of the enchant and spell it will cast in order to find and click on them. Images for the enchant 'Epic' and the spell 'Humongofrog' are included by default. However, if you intend to farm with a different spell/enchant, you will need to replace these images in order for the script to work. Here are the steps you can take to do this:
 1. Get the required images. The default images are screenshots directly from the game. However, the images from the Wizard101 Wiki should also work, provided they are resized. 
     - Note: Be sure to use the extension `.png`. 
     - You will need a picture of the spell, a picture of the enchant, and a picture of the spell after being enchanted.
