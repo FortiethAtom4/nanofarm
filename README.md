@@ -23,7 +23,8 @@ This script works by using local images of the enchant and spell it will cast in
 3. Replace the images in the /images/ folder. Make sure you name the replacement images EXACTLY the same as the ones currently in the folder (e.g. `enchant_template.png`,`spell_template.png`, `enchanted_spell.png`). 
 
 # IN-GAME PREP
-You will need to make a deck to use while the script is running. For best results, make a deck with 3 copies of the spell and 3 copies of the enchant. That way, in case of an unexpected event (a crit block, low roll, etc.) the script will simply continue to enchant and cast as soon as you have the pips to use another spell. 
+You will need to make a deck to use while the script is running. For best results, make a deck with 3 copies of the spell and 3 copies of the enchant. That way, in case of an unexpected event (a crit block, low roll, etc.) the script will simply continue to enchant and cast as soon as you have the pips to use another spell.
+
 Note: This script does NOT work with single-target spells. Be sure to use an AOE spell. Low-pip AOE spells are recommended, e.g. Frog, Meteor, Blizzard. 
 
 # USAGE
