@@ -18,7 +18,7 @@ def get_card_locale(img_rgb,template):
 def main():
     while True:
         enchant_selected = False
-        time.sleep(5)
+        time.sleep(3)
 
         
         # template images for spell, enchant, and enchanted spell
@@ -36,7 +36,7 @@ def main():
         if not len(list_enchant_loc) == 0:
             pyautogui.moveTo(list_enchant_loc[0][0],list_enchant_loc[0][1])
             pyautogui.click()
-            pyautogui.moveTo(100,100,0.5)
+            pyautogui.moveTo(100,100)
             enchant_selected = True
 
         # find spell on screen
@@ -49,7 +49,7 @@ def main():
         if not len(list_spell_loc) == 0 and enchant_selected:
             pyautogui.moveTo(list_spell_loc[0][0],list_spell_loc[0][1])
             pyautogui.click()
-            pyautogui.moveTo(100,100,1)
+            pyautogui.moveTo(100,100,0.25)
 
         # find the enchanted spell
         ss1 = pyautogui.screenshot("images/current_game.png")
