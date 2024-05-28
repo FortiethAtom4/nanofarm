@@ -1,5 +1,5 @@
 # nanofarm
-A wiz farming script written in Python. 
+A wiz farming script written in Python. /
 Created by Zirconium (@FortiethAtom4 on GitHub)
 # INSTALLATION
 1. Clone this repo to a local directory. `git clone https://github.com/FortiethAtom4/nanofarm.git` 
