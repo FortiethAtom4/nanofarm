@@ -24,11 +24,11 @@ Note: This script does NOT work with single-target spells. Be sure to use an AOE
 
 # USAGE
 
-Command: `python nanofarm.py` \
+Command: `python nanofarm.py` 
 
-The code will attempt to enchant/cast every 5 seconds. Simply start the script as you run into a battle and nanofarm will do the rest. \
+The code will attempt to enchant/cast every 5 seconds. Simply start the script as you run into a battle and nanofarm will do the rest. 
 
-The script will run infinitely until halted, but is safe to keep on if, e.g. you want to check your inventory or switch tabs temporarily between fights. The script will only force mouse movements/clicking if it detects the spell cards in the images folder. \
+The script will run infinitely until halted, but is safe to keep on if, e.g. you want to check your inventory or switch tabs temporarily between fights. The script will only force mouse movements/clicking if it detects the spell cards in the images folder. 
 
 This script does NOT take into account all the other factors of fights in wiz (HP, mana, backpack inventory space, etc.). Although the script will work forever in a vacuum, in reality you will eventually be whittled down by the mobs or run out of mana. This is unavoidable and a fact of life when farming in wiz. You can leave the script running for a while, but be ready to *eventually* walk your wizard away from the farming area temporarily to heal, regain mana and/or clear your inventory. 
 
