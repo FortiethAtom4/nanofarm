@@ -62,11 +62,11 @@ def main():
             pyautogui.moveTo(list_enchanted_spell_loc[0][0],list_enchanted_spell_loc[0][1])
             pyautogui.click()
             pyautogui.moveTo(100,100)
-        else:
-            pyautogui.keyDown("a")
-            time.sleep(0.5)
-            pyautogui.keyUp("a")
-            time.sleep(0.5)
+        # else:
+        #     pyautogui.keyDown("a")
+        #     time.sleep(0.5)
+        #     pyautogui.keyUp("a")
+        #     time.sleep(0.5)
             
         
         
