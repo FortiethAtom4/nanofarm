@@ -31,7 +31,7 @@ Note: This script does NOT work with single-target spells. Be sure to use an AOE
 
 Command: `python nanofarm.py` 
 
-The code will attempt to enchant/cast every 5 seconds. Simply start the script as you run into a battle and nanofarm will do the rest. 
+The code will attempt to enchant/cast every 3 seconds. Simply start the script as you run into a battle and nanofarm will do the rest. 
 
 The script will run indefinitely until halted, but is safe to keep on if, e.g. you want to check your inventory or switch tabs temporarily between fights. The script will only force mouse movements/clicking if it detects the spell cards in the images folder. 
 

@@ -10,15 +10,18 @@ def get_card_locale(img_rgb,template):
     w, h = template.shape[::-1]
 
     res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)
-    threshold = 0.75
+    threshold = 0.8
 
     loc = np.where( res >= threshold)
     return zip(*loc[::-1])
 
+# color of spellbook values:
+# lower bound: 55, 23, 27
+# upper bound: 132, 73, 66
 def main():
     while True:
         enchant_selected = False
-        time.sleep(5)
+        time.sleep(3)
 
         
         # template images for spell, enchant, and enchanted spell
@@ -40,8 +43,6 @@ def main():
             enchant_selected = True
 
         # find spell on screen
-        # ss1 = pyautogui.screenshot("images/current_game.png")
-        # img_rgb = cv.imread("images/current_game.png")
         spell_loc = get_card_locale(img_rgb,spell_template)
 
         # click on the spell to enchant it
@@ -62,11 +63,11 @@ def main():
             pyautogui.moveTo(list_enchanted_spell_loc[0][0],list_enchanted_spell_loc[0][1])
             pyautogui.click()
             pyautogui.moveTo(100,100)
-        # else:
-        #     pyautogui.keyDown("a")
-        #     time.sleep(0.5)
-        #     pyautogui.keyUp("a")
-        #     time.sleep(0.5)
+        else:
+            pyautogui.keyDown("a")
+            time.sleep(0.25)
+            pyautogui.keyUp("a")
+            time.sleep(0.25)
             
         
         
