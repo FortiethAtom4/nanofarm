@@ -10,7 +10,7 @@ def get_card_locale(img_rgb,template):
     w, h = template.shape[::-1]
 
     res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)
-    threshold = 0.8
+    threshold = 0.85
 
     loc = np.where( res >= threshold)
     return zip(*loc[::-1])
@@ -19,6 +19,7 @@ def get_card_locale(img_rgb,template):
 # lower bound: 55, 23, 27
 # upper bound: 132, 73, 66
 def main():
+    print("Now running...")
     while True:
         enchant_selected = False
         time.sleep(3)
@@ -30,6 +31,7 @@ def main():
         enchanted_spell_template = cv.imread("images/enchanted_spell.png",cv.IMREAD_GRAYSCALE)
 
         # find location of enchant on screen
+        # TODO: cleanup
         ss1 = pyautogui.screenshot("images/current_game.png")
         img_rgb = cv.imread("images/current_game.png")
         enchant_loc = get_card_locale(img_rgb,enchant_template)    
@@ -37,7 +39,7 @@ def main():
         # click on the first enchant
         list_enchant_loc = list(enchant_loc)
         if not len(list_enchant_loc) == 0:
-            pyautogui.moveTo(list_enchant_loc[0][0],list_enchant_loc[0][1])
+            pyautogui.moveTo(list_enchant_loc[0][0]+10,list_enchant_loc[0][1]+10,0.25)
             pyautogui.click()
             pyautogui.moveTo(100,100,0.2)
             enchant_selected = True
@@ -48,7 +50,7 @@ def main():
         # click on the spell to enchant it
         list_spell_loc = list(spell_loc)
         if not len(list_spell_loc) == 0 and enchant_selected:
-            pyautogui.moveTo(list_spell_loc[0][0],list_spell_loc[0][1])
+            pyautogui.moveTo(list_spell_loc[0][0]+10,list_spell_loc[0][1]+10,0.25)
             pyautogui.click()
             pyautogui.moveTo(100,100,0.2)
 
@@ -60,14 +62,15 @@ def main():
         # cast it
         list_enchanted_spell_loc = list(enchanted_spell_loc)
         if not len(list_enchanted_spell_loc) == 0:
-            pyautogui.moveTo(list_enchanted_spell_loc[0][0],list_enchanted_spell_loc[0][1])
+            pyautogui.moveTo(list_enchanted_spell_loc[0][0]+10,list_enchanted_spell_loc[0][1]+10,0.25)
             pyautogui.click()
-            pyautogui.moveTo(100,100)
         else:
             pyautogui.keyDown("a")
             time.sleep(0.25)
             pyautogui.keyUp("a")
             time.sleep(0.25)
+
+        pyautogui.moveTo(100,100,0.5)
             
         
         
