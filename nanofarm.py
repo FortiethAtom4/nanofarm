@@ -24,17 +24,18 @@ def get_card_locale(img_rgb,template):
 def main():
     parser = argparse.ArgumentParser(description='A wiz farming script written in Python.')
     parser.add_argument("-n","--no_enchant", help="Disables script enchant usage.", action="store_true")
-    parser.add_argument("-s","--shimmy", help="Enable automatic keyboard \
-                        presses between battles. This will increase farming speed but will make it unsafe to switch tabs while it is running.", \
-                            action="store_true")
+    parser.add_argument("-s","--shimmy", help="Enable automatic keyboard presses between battles. \
+                         This will increase farming speed but will make it unsafe to switch tabs while it is running.",
+                         action="store_true")
     parser.add_argument("-t","--timer", type=int, default=-1, help="Set a value to automatically stop the script after a set amount of time.")
     args = parser.parse_args()
     
+    # Used to time script usage
     farm_timer_start = time.time()
     # Template images for spell, enchant, and enchanted spell
     spell_template = enchant_template = enchanted_spell_template = ""
     print("Reading in spell images...")
-    # This can't be the most efficient way to do this
+    # This can't be the most efficient way to do this. Use a dict or something
     if isfile("images/spell_template.png"):
         spell_template = cv.imread("images/spell_template.png",cv.IMREAD_GRAYSCALE)
         print("-> Spell template found.")
