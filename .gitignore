@@ -2,3 +2,6 @@ venv
 testscript.py
 current_game.png
 *.mp4
+
+images/
+"other images"/
