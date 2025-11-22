@@ -1,6 +1,5 @@
 from genericpath import isfile
 import random
-from xmlrpc.client import boolean
 import cv2 as cv
 import pyautogui
 import time
@@ -18,6 +17,16 @@ def get_card_locale(img_rgb,template):
 
     loc = np.where( res >= threshold)
     return zip(*loc[::-1])
+
+# function to click a card found with get_card_locale
+# mouse is moved away after clicking due to funky wiz resize-on-hover logic
+def click_first_card(img_rgb,template):
+    list_locs = list(get_card_locale(img_rgb,template))
+    if not len(list_locs) == 0:
+        pyautogui.moveTo(list_locs[0][0]+15,list_locs[0][1]+15,0.25)
+        pyautogui.click()
+        pyautogui.moveTo(100 + random.randrange(0,25),100 + random.randrange(-25,25),0.25)
+        time.sleep(0.25)
 
 def get_spell_image(img_path: str):
     if isfile(img_path):
@@ -53,49 +62,22 @@ def main():
     print(args_string)
     print("-> Now Running...\nPress Ctrl+C at any time to stop")
 
-
     # Loop
     while True:
-        enchant_selected = False
         time.sleep(3)
         
         # find location of enchant on screen
-        # TODO: cleanup
-        ss1 = pyautogui.screenshot("images/current_game.png")
+        pyautogui.screenshot("images/current_game.png")
         img_rgb = cv.imread("images/current_game.png")
-          
+        time.sleep(0.5)
 
-        # click on the first enchant
-        if not args.no_enchant:
-            enchant_loc = get_card_locale(img_rgb,enchant_template)
-            list_enchant_loc = list(enchant_loc)
-            if not len(list_enchant_loc) == 0:
-                pyautogui.moveTo(list_enchant_loc[0][0]+15,list_enchant_loc[0][1]+15,0.25)
-                pyautogui.click()
-                pyautogui.moveTo(100 + random.randrange(0,25),100 + random.randrange(-25,25),0.25)
-                enchant_selected = True
+        farm_timer_end = time.time() - farm_timer_start
+        print(f"Current farm duration: {round(farm_timer_end,2)}s")
+        if args.timer > 0 and farm_timer_end >= args.timer:
+            print("-> Farm time limit reached. Terminating script...")
+            break
 
-        # find spell on screen
-        spell_loc = get_card_locale(img_rgb,spell_template)
-
-        # click on the spell to enchant it
-        list_spell_loc = list(spell_loc)
-        if not len(list_spell_loc) == 0 and (enchant_selected or args.no_enchant):
-            pyautogui.moveTo(list_spell_loc[0][0]+15,list_spell_loc[0][1]+15,0.25)
-            pyautogui.click()
-            pyautogui.moveTo(100 + random.randrange(0,25),100 + random.randrange(-25,25),0.25)
-            
-        # find the enchanted spell
-        if not args.no_enchant:
-            ss1 = pyautogui.screenshot("images/current_game.png")
-            img_rgb = cv.imread("images/current_game.png")
-            enchanted_spell_loc = get_card_locale(img_rgb,enchanted_spell_template)
-            # cast it
-            list_enchanted_spell_loc = list(enchanted_spell_loc)
-            if not len(list_enchanted_spell_loc) == 0:
-                pyautogui.moveTo(list_enchanted_spell_loc[0][0]+15,list_enchanted_spell_loc[0][1]+15,0.25)
-                pyautogui.click()
-
+        # make wizard shimmy a little to speed up runs, if enabled
         if args.shimmy:
             pyautogui.keyDown("a")
             time.sleep(0.25)
@@ -103,19 +85,30 @@ def main():
             pyautogui.keyDown("d")
             time.sleep(0.25)
             pyautogui.keyUp("d")
-           
 
+        # do a test run on the screenshot. If no spell card found, sleep and try again
+        if len(list(get_card_locale(img_rgb,spell_template))) == 0:
+            print("Nothing to do")
+            continue
+
+        print("Casting spell")
+
+        # click on the first enchant
+        if not args.no_enchant:
+            click_first_card(img_rgb,enchant_template)
+
+        # click the spell (to cast, or to enchant if enchanting is enabled)
+        click_first_card(img_rgb,spell_template)
+            
+        # find the enchanted spell
+        if not args.no_enchant:
+            pyautogui.screenshot("images/current_game.png")
+            img_rgb = cv.imread("images/current_game.png")
+            time.sleep(0.5)
+            click_first_card(img_rgb,enchanted_spell_template)
+           
+        # move mouse back to corner to "reset"
         pyautogui.moveTo(100 + random.randrange(0,25),100 + random.randrange(-25,25),0.25)
-        farm_timer_end = time.time() - farm_timer_start
-        print(f"Current farm duration: {round(farm_timer_end,2)}s")
-        if args.timer > 0 and farm_timer_end >= args.timer:
-            print("-> Farm time limit reached. Terminating script...")
-            break
-        
-            
-            
-        
-        
 
 if __name__ == "__main__":
     main()
